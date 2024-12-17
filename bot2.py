@@ -13,7 +13,7 @@ class MessageRequest(BaseModel):
 
 
 # Function to read and process the file
-def search_in_file(query: str, filename="sample.txt"):
+def search_in_file(query: str, filename="sample_text.txt"):
     # Read the content from sample.txt
     with open(filename, "r") as file:
         content = file.read().splitlines()  # Split into lines for easier processing
@@ -38,7 +38,7 @@ def search_in_file(query: str, filename="sample.txt"):
 
 
 # API endpoint for calling the NVIDIA model
-NVIDIA_API_KEY = "your-nvidia-api-key"
+NVIDIA_API_KEY = "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"
 NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 
 
