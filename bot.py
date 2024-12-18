@@ -90,10 +90,37 @@ async def get_html():
 
                 if (data.response) {
                     responseDiv.innerHTML = "<b>Response:</b> " + data.response;
+                    speakResponse(data.response); // Speak the response aloud
                 } else {
                     responseDiv.innerHTML = "<b>Error:</b> " + data.error;
                 }
             }
+            // Function to capture speech input
+        function startSpeechRecognition() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = function (event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById("userInput").value = transcript;
+            };
+
+            recognition.onerror = function (event) {
+                alert('Error occurred in recognition: ' + event.error);
+            };
+        }
+
+        // Function to speak the bot's response
+        function speakResponse(text) {
+            const speechSynthesis = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            speechSynthesis.speak(utterance);
+        }
         </script>
     </head>
     <body>
@@ -101,6 +128,7 @@ async def get_html():
         <div>
             <label for="userInput">Enter your query:</label><br>
             <input type="text" id="userInput" name="userInput" size="50">
+            <button onclick="startSpeechRecognition()">🎤 Mic</button>
         </div>
         <br>
         <button onclick="generateResponse()">Generate Response</button>
