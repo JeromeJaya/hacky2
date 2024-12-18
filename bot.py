@@ -36,6 +36,8 @@ async def generate_response(request: MessageRequest):
     
     # Combine the retrieved content with the user query
     prompt = f"User query: {request.content}\n\nRelevant content:\n{relevant_content}\n\nResponse:"
+    #prompt = "answer the question only from the following data" + content + "the question is:" + request.content
+    
     
     headers = {
         "Authorization": f"Bearer {NVIDIA_API_KEY}",
